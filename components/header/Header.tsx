@@ -114,8 +114,11 @@ const Header = ({ setThemeWhatever }: Props) => {
                                             <Dialog.Panel className="pointer-events-auto w-screen md:w-[377px]">
                                                 <div className="flex h-full flex-col overflow-y-scroll bg-bkg shadow-xl">
                                                     <div className="flex items-center justify-between border-b md:border-none">
-                                                        <Dialog.Title className="py-2 px-6 text-3xl font-semibold">
-                                                            <Link href="/">
+                                                        <Dialog.Title className="py-2 px-6 text-3xl font-semibold focus:outline-none">
+                                                            <Link
+                                                                href="/"
+                                                                className="focus:outline-none"
+                                                            >
                                                                 <Image
                                                                     className="h-full w-full object-contain"
                                                                     alt="Thirdweb Logo"
