@@ -34,13 +34,13 @@ const Header = ({ setThemeWhatever }: Props) => {
                             onClick={connectWithMetamask}
                             className="connectWalletBtn hover:border-grayBorder"
                         >
-                            Connect my wallet
+                            Connect <span className="ml-1 hidden md:flex">my wallet</span>
                         </button>
                     )}
                     <p className="headerLink">Daily Deals</p>
                     <p className="headerLink">Help & Contact</p>
                 </div>
-                <div className="flex items-center space-x-1">
+                <div className="hidden items-center space-x-1 md:flex">
                     <button
                         className="animate-blob"
                         onClick={() => setThemeWhatever("theme-ebay-red")}
