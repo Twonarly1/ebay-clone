@@ -65,6 +65,10 @@
         @apply cursor-pointer rounded-md border border-gray-200 bg-skin-button-accent-hover p-5  
         hover:bg-opacity-70;
     }
+    .categoryItem {
+        @apply block w-full px-4 py-2 text-left text-xs text-gray-700 
+        hover:text-flatBlack;
+    }
 }
 
 @layer utilities {

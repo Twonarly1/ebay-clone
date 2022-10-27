@@ -11,7 +11,13 @@ const Home: NextPage = () => {
     const [themeWhatever, setThemeWhatever] = useState<any>("")
 
     return (
-        <div className={`bg-bkg ${themeWhatever === "root" ? "" : themeWhatever}`}>
+        <div className={` -z-50 ${themeWhatever === "root" ? "" : themeWhatever}`}>
+            <img
+                src="/bkg-lines.svg"
+                className="w-full md:flex bg:bg-repeat-y hidden bg-bkg opacity-30 -z-40 absolute top-0 min-h-screen"
+                alt=""
+            />
+
             <Header setThemeWhatever={setThemeWhatever} />
 
             <main className="max-w-6xl mx-auto py-4 px-6">

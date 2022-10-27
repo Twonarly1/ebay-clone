@@ -1,7 +1,7 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
-import network from "lib/utils/network"
+import network from "lib/thirdweb/network"
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react"
 import Link from "next/link"
 import {
@@ -8,6 +8,7 @@ import {
     MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline"
 import Image from "next/image"
+import { Dropdown } from "components/categories"
 
 type Props = {
     setThemeWhatever: any
@@ -32,7 +33,7 @@ const Header = ({ setThemeWhatever }: Props) => {
                     ) : (
                         <button
                             onClick={connectWithMetamask}
-                            className="connectWalletBtn hover:border-grayBorder"
+                            className="connectWalletBtn flex hover:border-grayBorder"
                         >
                             Connect <span className="ml-1 hidden md:flex">my wallet</span>
                         </button>
@@ -131,7 +132,8 @@ const Header = ({ setThemeWhatever }: Props) => {
                 <p className="link hidden lg:inline">Music</p>
                 <p className="link hidden xl:inline">Deals</p>
                 <p className="link hidden xl:inline">Other</p>
-                <p className="link">More</p>
+                {/* <p className="link">More</p> */}
+                <Dropdown />
             </section>
         </div>
     )

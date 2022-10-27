@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.3",
     "@heroicons/react": "^2.0.12",
     "@thirdweb-dev/react": "^3.4.2",
     "@thirdweb-dev/sdk": "^3.4.2",
