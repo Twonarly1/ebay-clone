@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useAddress, useDisconnect, useMetamask } from "@thirdweb-dev/react"
 import Link from "next/link"
 import {
@@ -9,28 +9,62 @@ import {
 } from "@heroicons/react/24/outline"
 import Image from "next/image"
 
-type Props = {}
+type Props = {
+    setThemeWhatever: any
+}
 
-const Header = (props: Props) => {
+const Header = ({ setThemeWhatever }: Props) => {
     const connectWithMetamask = useMetamask()
     const disconnect = useDisconnect()
     const address = useAddress()
 
     return (
-        <div className=" mx-auto max-w-6xl p-2 text-skin-base">
+        <div className=" mx-auto max-w-6xl bg-flatWhite p-2 text-skin-base">
             <nav className="flex justify-between">
                 <div className="flex items-center space-x-2 text-sm">
                     {address ? (
-                        <button onClick={disconnect} className="connectWalletBtn">
+                        <button
+                            onClick={disconnect}
+                            className="connectWalletBtn hover:border-grayBorder"
+                        >
                             Hi, {address.slice(0, 4) + "..." + address.slice(-4)}
                         </button>
                     ) : (
-                        <button onClick={connectWithMetamask} className="connectWalletBtn">
+                        <button
+                            onClick={connectWithMetamask}
+                            className="connectWalletBtn hover:border-grayBorder"
+                        >
                             Connect my wallet
                         </button>
                     )}
                     <p className="headerLink">Daily Deals</p>
                     <p className="headerLink">Help & Contact</p>
+                </div>
+                <div className="flex items-center space-x-1">
+                    <button
+                        className="animate-blob"
+                        onClick={() => setThemeWhatever("theme-ebay-red")}
+                    >
+                        <div className="h-5 w-5 rounded-full bg-ebay-red" />
+                    </button>
+                    <button
+                        className="animation-delay-2000 animate-blob"
+                        onClick={() => setThemeWhatever("root")}
+                    >
+                        <div className="h-5 w-5 rounded-full bg-ebay-blue" />
+                    </button>
+                    <button
+                        className="animation-delay-4000 animate-blob"
+                        onClick={() => setThemeWhatever("theme-ebay-yellow")}
+                    >
+                        <div className="h-5 w-5 rounded-full bg-ebay-yellow" />
+                    </button>
+                    <button
+                        className="animation-delay-6000 animate-blob"
+                        onClick={() => setThemeWhatever("theme-ebay-green")}
+                    >
+                        <div className="h-5 w-5 rounded-full bg-ebay-green" />
+                    </button>
                 </div>
                 <div className="flex items-center space-x-4 text-sm">
                     <p className="headerLink">Ship to</p>
@@ -64,7 +98,7 @@ const Header = (props: Props) => {
                     <ChevronDownIcon className="h-4 flex-shrink-0" />
                 </button>
 
-                <div className="flex flex-1 items-center space-x-2 border-2 border-black px-2 py-2 md:px-5">
+                <div className="flex flex-1 items-center space-x-2 border-2 border-flatBlack px-2 py-2 md:px-5">
                     <MagnifyingGlassIcon className="w-5 text-skin-accent" />
                     <input
                         className="flex-1 outline-none"
@@ -73,11 +107,11 @@ const Header = (props: Props) => {
                     />
                 </div>
 
-                <button className="hidden border-2 border-transparent bg-skin-button-accent px-5 py-2 text-skin-inverted hover:border-blue-500 hover:bg-skin-button-accent-hover hover:text-skin-muted sm:inline md:px-10">
+                <button className="hidden border-2 border-transparent bg-skin-button-accent px-5 py-2 text-skin-inverted hover:border-grayBorder hover:bg-skin-button-accent-hover hover:text-skin-muted sm:inline md:px-10">
                     Search
                 </button>
                 <Link href="/create">
-                    <button className="flex border-2 border-blue-500 bg-skin-button-accent-hover px-5 py-2 text-skin-muted hover:bg-skin-fill hover:text-skin-inverted md:px-10">
+                    <button className="flex border-2 border-grayBorder bg-skin-button-accent-hover px-5 py-2 text-skin-muted hover:bg-skin-fill hover:text-skin-inverted md:px-10">
                         List <span className="hidden md:ml-1 md:flex">Item</span>
                     </button>
                 </Link>
