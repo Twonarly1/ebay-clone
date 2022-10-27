@@ -4,7 +4,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/outline"
 
 export default function Dropdown() {
     return (
-        <Menu as="div" className="relative z-50 inline-block text-left">
+        <Menu as="div" className="relative z-20 inline-block text-left">
             <div>
                 <Menu.Button className="flex cursor-pointer  items-center text-skin-base xl:hidden">
                     <span className="sr-only">Open options</span>
