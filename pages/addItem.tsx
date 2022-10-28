@@ -49,7 +49,7 @@ const addItem = (props: Props) => {
     }
 
     return (
-        <div className={` -z-50 ${themeWhatever}`}>
+        <div className={` -z-50 ${themeWhatever === "root" ? "" : themeWhatever}`}>
             <img
                 src="/bkg-lines.svg"
                 className=" absolute top-0 -z-40  min-h-screen w-full bg-bkg opacity-30 md:flex"

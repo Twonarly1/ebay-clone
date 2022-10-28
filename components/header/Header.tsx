@@ -13,6 +13,8 @@ import {
     TruckIcon,
     PlusIcon,
     PlusSmallIcon,
+    BoltIcon,
+    BoltSlashIcon,
 } from "@heroicons/react/24/outline"
 import Image from "next/image"
 import { Dropdown } from "components/categories"
@@ -169,6 +171,16 @@ const Header = ({}: Props) => {
                                                         </div>
                                                     </div>
                                                     <div className="flex flex-col divide-y px-3 text-left text-skin-accent">
+                                                        {address && (
+                                                            <div className="flex items-center justify-center space-x-2 py-3 text-center font-semibold tracking-wide md:justify-start">
+                                                                <p className="h-3 w-3 animate-pulse rounded-full bg-green-500"></p>
+                                                                <p>
+                                                                    {address.slice(0, 6) +
+                                                                        "..." +
+                                                                        address.slice(-6)}
+                                                                </p>
+                                                            </div>
+                                                        )}
                                                         <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
                                                             <TruckIcon className="w-6" />
                                                             <p className="headerLink">Ship to</p>
@@ -196,6 +208,26 @@ const Header = ({}: Props) => {
                                                         <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
                                                             <ShoppingCartIcon className="headerLink w-6 " />{" "}
                                                             <p className="headerLink">My Cart</p>
+                                                        </div>
+                                                        <div className="group flex items-center justify-center md:justify-start ">
+                                                            {address ? (
+                                                                <button
+                                                                    onClick={disconnect}
+                                                                    className="headerLink flex cursor-pointer space-x-2 py-4 group-hover:text-flatBlack"
+                                                                >
+                                                                    <BoltSlashIcon className="w-6" />
+
+                                                                    <p className="">Disconnect</p>
+                                                                </button>
+                                                            ) : (
+                                                                <button
+                                                                    onClick={connectWithMetamask}
+                                                                    className="headerLink flex  cursor-pointer space-x-2 py-4 group-hover:text-flatBlack"
+                                                                >
+                                                                    <BoltIcon className="w-6" />
+                                                                    <p className="">Connect</p>
+                                                                </button>
+                                                            )}
                                                         </div>
                                                     </div>
                                                     <footer className=" absolute bottom-2 z-20 mx-auto flex w-full cursor-pointer items-center justify-center space-x-3 py-4 text-sm text-skin-accent">

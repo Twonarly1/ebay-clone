@@ -112,7 +112,7 @@ const Create = (props: Props) => {
     }
 
     return (
-        <div className={` ${themeWhatever} -z-50`}>
+        <div className={` ${themeWhatever === "root" ? "" : themeWhatever} -z-50`}>
             <img
                 src="/bkg-lines.svg"
                 className="bg:bg-repeat-y absolute top-0 -z-40 min-h-screen w-full bg-bkg opacity-30 md:flex"
@@ -120,7 +120,7 @@ const Create = (props: Props) => {
             />
             <Header />
 
-            <main className="mx-auto max-w-6xl border p-10 ">
+            <main className="relative mx-auto max-w-6xl border p-10 ">
                 <h1 className="text-4xl font-bold opacity-50">List an Item</h1>
                 <h2 className="pt-5 text-xl font-semibold text-skin-accent">
                     Select an Item you would like to Sell
@@ -129,6 +129,11 @@ const Create = (props: Props) => {
                 <p className="pb-5 text-skin-accent">
                     Below you will find the NFT's you own in your wallet
                 </p>
+                {!address && (
+                    <p className="absolute bottom-4 animate-bounce text-xs text-skin-accent">
+                        please connect your wallet to the Mumbai test network.
+                    </p>
+                )}
                 <div className=" scrollbar-thumb-rounded flex space-x-2 overflow-x-scroll p-4 scrollbar-thin scrollbar-thumb-grayBorder">
                     {ownedNFTs?.data?.map((nft: NFT) => (
                         <div

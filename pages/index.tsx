@@ -13,7 +13,7 @@ const Home: NextPage = () => {
     const themeWhatever = useStore().themeName
 
     return (
-        <div className={`-z-50 ${themeWhatever}`}>
+        <div className={`-z-50 ${themeWhatever === "root" ? "" : themeWhatever}`}>
             <img
                 src="/bkg-lines.svg"
                 className="w-full md:flex bg:bg-repeat-y hidden  opacity-30 -z-40 absolute top-0 min-h-screen"
