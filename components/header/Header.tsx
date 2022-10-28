@@ -212,12 +212,12 @@ const Header = ({ setThemeWhatever }: Props) => {
                 </div>
 
                 <button className="hidden w-20 items-center space-x-2 lg:flex">
-                    <p className="text-sm text-skin-accent">Shop by Category</p>
+                    <p className="text-xs text-skin-accent">Shop by Category</p>
                     <ChevronDownIcon className="h-4 flex-shrink-0" />
                 </button>
 
-                <div className="flex flex-1 items-center space-x-2 border-2 border-flatBlack px-2 py-2 md:px-5">
-                    <MagnifyingGlassIcon className="w-5 text-skin-accent" />
+                <div className="flex flex-1 items-center space-x-2 border-2 border-grayBorder px-2 py-2 md:px-5">
+                    <MagnifyingGlassIcon className="w-5 text-skin-muted" />
                     <input
                         className="flex-1 outline-none"
                         type="text"
