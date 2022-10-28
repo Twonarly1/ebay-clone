@@ -16,7 +16,7 @@ const Home: NextPage = () => {
         <div className={`-z-50 ${themeWhatever}`}>
             <img
                 src="/bkg-lines.svg"
-                className="w-full md:flex bg:bg-repeat-y hidden bg-bkg opacity-30 -z-40 absolute top-0 min-h-screen"
+                className="w-full md:flex bg:bg-repeat-y hidden  opacity-30 -z-40 absolute top-0 min-h-screen"
                 alt=""
             />
 
@@ -32,7 +32,7 @@ const Home: NextPage = () => {
                                 key={listing.id}
                                 className="flex flex-col relative card hover:scale-105 md:odd:hover:-skew-x-1 md:hover:skew-x-1 transition-all duration-150 ease-out"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-br from-skin-hue/30 via-skin-hue/10 to-transparent opacity-50"></div>
+                                <div className="absolute inset-0 bg-gradient-to-br rounded from-skin-hue/30 via-skin-hue/10 to-transparent opacity-50"></div>
 
                                 <div className="flex-1 flex flex-col pb-2 items-center">
                                     <MediaRenderer

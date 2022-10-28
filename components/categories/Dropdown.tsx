@@ -6,7 +6,7 @@ export default function Dropdown() {
     return (
         <Menu as="div" className="relative z-20 inline-block text-left">
             <div>
-                <Menu.Button className="flex cursor-pointer  items-center text-skin-base xl:hidden">
+                <Menu.Button className="flex cursor-pointer  items-center text-skin-accent xl:hidden">
                     <span className="sr-only">Open options</span>
                     <p className="hover:underline-none">More</p>
                     <ChevronDownIcon className="ml-1 w-3" aria-hidden="true" />

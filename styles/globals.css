@@ -4,7 +4,7 @@
 
 @layer base {
     body {
-        @apply text-gray-600;
+        @apply bg-bkg;
     }
 
     :root {
@@ -55,18 +55,17 @@
         py-2 px-4 text-xs font-semibold text-skin-inverted hover:border hover:bg-skin-button-accent-hover hover:bg-opacity-70 hover:text-skin-muted;
     }
     .headerLink {
-        @apply cursor-pointer;
+        @apply cursor-default;
     }
     .link {
-        @apply cursor-pointer text-skin-base  
-        hover:underline;
+        @apply cursor-default text-skin-accent hover:text-flatBlack;
     }
     .card {
         @apply cursor-pointer rounded-md border border-gray-200 bg-skin-button-accent-hover p-5  
         hover:bg-opacity-70;
     }
     .categoryItem {
-        @apply block w-full px-4 py-2 text-left text-xs text-gray-700 
+        @apply block w-full px-4 py-2 text-left text-xs text-skin-accent
         hover:text-flatBlack;
     }
     .formField {
@@ -83,6 +82,6 @@
         animation-delay: 4s;
     }
     .animation-delay-6000 {
-        animation-delay: 4s;
+        animation-delay: 6s;
     }
 }

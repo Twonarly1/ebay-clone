@@ -8,7 +8,6 @@ import Image from "next/image"
 type Props = {}
 
 const addItem = (props: Props) => {
-    // const [themeWhatever, setThemeWhatever] = useState<any>("")
     const address = useAddress()
     const router = useRouter()
     const { contract } = useContract(process.env.NEXT_PUBLIC_COLLECTION_CONTRACT, "nft-collection")
@@ -43,7 +42,7 @@ const addItem = (props: Props) => {
             const nft = await tx.data()
 
             console.log(receipt, tokenId, nft)
-            router.push("/")
+            router.push("/create")
         } catch (error) {
             console.error(error)
         }
@@ -53,20 +52,20 @@ const addItem = (props: Props) => {
         <div className={` -z-50 ${themeWhatever}`}>
             <img
                 src="/bkg-lines.svg"
-                className="bg:bg-repeat-y absolute top-0 -z-40  min-h-screen w-full bg-bkg opacity-30 md:flex"
+                className=" absolute top-0 -z-40  min-h-screen w-full bg-bkg opacity-30 md:flex"
                 alt=""
             />
             <Header />
             <main className="mx-auto max-w-6xl border p-10">
-                <h1 className="text-4xl font-bold">Add an Item to the Marketplace</h1>
-                <h2 className="pt-5 text-xl font-semibold">Item Details</h2>
-                <p className="pb-5">
+                <h1 className="text-4xl font-bold opacity-50">Add an Item to the Marketplace</h1>
+                <h2 className="pt-5 text-xl font-semibold text-skin-accent">Item Details</h2>
+                <p className="pb-5 text-skin-accent">
                     By adding an item to the marketplace, you're essentially Minting an NFT of the
                     item into your wallet which we can then list for sale!
                 </p>
                 <div className="relative flex flex-col items-center justify-center pt-5 md:flex-row md:space-x-5">
                     <Image
-                        className="h-80 w-80 shrink-0 border object-contain"
+                        className="h-80 w-80 shrink-0 border bg-black object-contain"
                         alt="Thirdweb Logo"
                         src={preview || "https://links.papareact.com/ucj"}
                         width={100}
@@ -111,7 +110,7 @@ const addItem = (props: Props) => {
                             }}
                         />
                         <button
-                            // type="submit"
+                            type="submit"
                             className="bottom-0 right-2 w-full  justify-center rounded bg-skin-fill py-2 px-10 font-semibold text-skin-inverted md:absolute  md:mt-auto md:w-56 md:justify-end"
                         >
                             Add / Mint Item

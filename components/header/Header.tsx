@@ -33,6 +33,7 @@ type Action = {
     updateThemeName: (themeName: MyTheme["themeName"]) => void
 }
 
+//persisten issues
 export const useStore = create<MyTheme & Action>()(
     devtools(
         persist((set) => ({
@@ -56,7 +57,7 @@ const Header = ({}: Props) => {
     }, [])
 
     return (
-        <div className=" mx-auto max-w-6xl bg-flatWhite p-2 text-skin-base">
+        <div className=" mx-auto max-w-6xl bg-flatWhite p-2 text-skin-accent">
             <nav className="flex justify-between">
                 <div className="flex items-center space-x-2 text-sm md:space-x-4">
                     {address ? (
@@ -74,14 +75,14 @@ const Header = ({}: Props) => {
                             Connect <span className="ml-1 hidden md:flex">my wallet</span>
                         </button>
                     )}
-                    <p className="headerLink flex text-xs md:text-sm">
+                    <p className="headerLink flex text-xs hover:text-flatBlack md:text-sm">
                         <span className="mr-1 hidden md:flex">Daily</span> Deals
                     </p>
-                    <p className="headerLink flex text-xs md:text-sm">
+                    <p className="headerLink flex text-xs hover:text-flatBlack md:text-sm">
                         Help<span className="ml-1 hidden md:flex">& Contact</span>
                     </p>
-                    <Link href="/addItem">
-                        <PlusSmallIcon className="hidden w-5 cursor-pointer hover:scale-110 xs:flex" />
+                    <Link href="/addItem" className=" hover:text-flatBlack">
+                        <PlusIcon className="hidden w-4 cursor-default hover:scale-110 xs:flex md:w-5" />
                     </Link>
                 </div>
 
@@ -116,7 +117,7 @@ const Header = ({}: Props) => {
                     <div className="links cursor-pointer">
                         <Bars3Icon
                             onClick={() => setOpen(true)}
-                            className="h-8 w-8 rounded border border-grayBorder p-1  font-medium "
+                            className="h-8 w-8 rounded border border-grayBorder p-1 font-medium text-skin-accent hover:text-flatBlack "
                         />
                     </div>
                     <Transition.Root show={open} as={Fragment}>
@@ -154,7 +155,7 @@ const Header = ({}: Props) => {
                                                         <div className="mr-3 flex items-center">
                                                             <button
                                                                 type="button"
-                                                                className=" rounded-md focus:outline-none"
+                                                                className=" rounded-md text-skin-accent focus:outline-none hover:text-flatBlack"
                                                                 onClick={() => setOpen(false)}
                                                             >
                                                                 <span className="sr-only">
@@ -167,37 +168,37 @@ const Header = ({}: Props) => {
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div className="flex flex-col divide-y px-3 text-left">
-                                                        <div className="flex justify-center space-x-2 py-4 md:justify-start ">
+                                                    <div className="flex flex-col divide-y px-3 text-left text-skin-accent">
+                                                        <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
                                                             <TruckIcon className="w-6" />
                                                             <p className="headerLink">Ship to</p>
                                                         </div>
-                                                        <div className="flex justify-center space-x-2 py-4 md:justify-start ">
+                                                        <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
                                                             <TagIcon className="w-6" />
                                                             <p className="headerLink">Sell</p>
                                                         </div>
-                                                        <div className="flex justify-center space-x-2 py-4 md:justify-start ">
+                                                        <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
                                                             <BookmarkIcon className="w-6" />
                                                             <p className="headerLink">Watchlist</p>
                                                         </div>
                                                         <Link
                                                             href="/addItem"
-                                                            className="hover:link headerLink flex items-center  justify-center space-x-2 py-4 md:justify-start"
+                                                            className="headerLink flex cursor-default items-center justify-center space-x-2  py-4 hover:text-flatBlack  md:justify-start"
                                                         >
-                                                            <PlusIcon className="w-6 cursor-pointer" />
-                                                            <p>Add to Inventory</p>
-                                                            <ChevronDownIcon className="h-4" />
+                                                            <PlusIcon className="w-6 " />
+                                                            <p>Add Inventory</p>
+                                                            {/* <ChevronDownIcon className="h-4" /> */}
                                                         </Link>
-                                                        <div className="flex justify-center space-x-2 py-4 md:justify-start ">
-                                                            <BellIcon className="headerLink w-6 cursor-pointer" />{" "}
-                                                            <p className="headerLink">Watchlist</p>
+                                                        <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
+                                                            <BellIcon className="headerLink w-6 " />{" "}
+                                                            <p className="headerLink">Reminders</p>
                                                         </div>
-                                                        <div className="flex justify-center space-x-2 py-4 md:justify-start ">
-                                                            <ShoppingCartIcon className="headerLink w-6 cursor-pointer" />{" "}
-                                                            <p className="headerLink">Watchlist</p>
+                                                        <div className="flex justify-center space-x-2 py-4 hover:text-flatBlack md:justify-start ">
+                                                            <ShoppingCartIcon className="headerLink w-6 " />{" "}
+                                                            <p className="headerLink">My Cart</p>
                                                         </div>
                                                     </div>
-                                                    <footer className=" absolute bottom-2 z-20 mx-auto flex w-full cursor-pointer items-center justify-center space-x-3 py-4 text-sm">
+                                                    <footer className=" absolute bottom-2 z-20 mx-auto flex w-full cursor-pointer items-center justify-center space-x-3 py-4 text-sm text-skin-accent">
                                                         <a href="https://beau-hawkinson.vercel.app/">
                                                             ©️ bhawkinson
                                                         </a>
@@ -288,7 +289,7 @@ const Header = ({}: Props) => {
 
             <hr />
 
-            <section className="flex justify-center space-x-6 whitespace-nowrap py-3 px-6 text-xs md:text-sm">
+            <section className="mt-2 flex justify-center space-x-6 whitespace-nowrap py-1 px-6 text-sm">
                 <p className="link">Home</p>
                 <p className="link">Electronics</p>
                 <p className="link">Computers</p>

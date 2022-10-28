@@ -23,8 +23,10 @@ const Create = (props: Props) => {
     const router = useRouter()
     const themeWhatever = useStore().themeName //update theme using zustand
     console.log(address)
+    const [myNFTs, setMyNFTs] = useState<any>([])
 
     const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT, "marketplace")
+
     const [selectedNft, setSelectedNft] = useState<NFT>()
 
     const { contract: collectionContract } = useContract(
@@ -42,6 +44,11 @@ const Create = (props: Props) => {
         isLoading: isLoadingAuction,
         error: errorAuction,
     } = useCreateAuctionListing(contract)
+
+    // useEffect(() => {
+    //     if (!address || !collectionContract) return
+    //     setMyNFTs(useOwnedNFTs(collectionContract, address))
+    // }, [address, collectionContract])
 
     const handleCreateListing = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -113,17 +120,17 @@ const Create = (props: Props) => {
             />
             <Header />
 
-            <main className="mx-auto max-w-6xl p-10 pt-2">
-                <h1 className="text-4xl font-bold">List an Item</h1>
-                <h2 className="pt-5 text-xl font-semibold">
+            <main className="mx-auto max-w-6xl border p-10 ">
+                <h1 className="text-4xl font-bold opacity-50">List an Item</h1>
+                <h2 className="pt-5 text-xl font-semibold text-skin-accent">
                     Select an Item you would like to Sell
                 </h2>
 
-                <hr className="mb-5" />
-
-                <p>Below you will find the NFT's you own in your wallet</p>
-                <div className="flex space-x-2 overflow-x-scroll p-4">
-                    {ownedNFTs?.data?.map((nft) => (
+                <p className="pb-5 text-skin-accent">
+                    Below you will find the NFT's you own in your wallet
+                </p>
+                <div className=" scrollbar-thumb-rounded flex space-x-2 overflow-x-scroll p-4 scrollbar-thin scrollbar-thumb-grayBorder">
+                    {ownedNFTs?.data?.map((nft: NFT) => (
                         <div
                             onClick={() => setSelectedNft(nft)}
                             className={`card relative flex min-w-fit flex-col space-y-2 border-2 transition-all duration-150 ease-out  hover:scale-105  ${
