@@ -69,6 +69,10 @@
         @apply block w-full px-4 py-2 text-left text-xs text-gray-700 
         hover:text-flatBlack;
     }
+    .formField {
+        @apply h-10  w-full rounded-lg border-2 border-gray-300 bg-flatWhite 
+        px-5 pr-16 text-sm outline-none;
+    }
 }
 
 @layer utilities {

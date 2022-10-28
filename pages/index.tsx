@@ -4,21 +4,23 @@ import { useActiveListings, useContract, MediaRenderer } from "@thirdweb-dev/rea
 import { ListingType } from "@thirdweb-dev/sdk"
 import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
+import { useStore } from "components/header/Header"
 
 const Home: NextPage = () => {
     const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT, "marketplace")
     const { data: listings, isLoading: loadingListings } = useActiveListings(contract)
-    const [themeWhatever, setThemeWhatever] = useState<any>("")
+    // const [themeWhatever, setThemeWhatever] = useState<any>("")
+    const themeWhatever = useStore().themeName
 
     return (
-        <div className={` -z-50 ${themeWhatever === "root" ? "" : themeWhatever}`}>
+        <div className={`-z-50 ${themeWhatever}`}>
             <img
                 src="/bkg-lines.svg"
                 className="w-full md:flex bg:bg-repeat-y hidden bg-bkg opacity-30 -z-40 absolute top-0 min-h-screen"
                 alt=""
             />
 
-            <Header setThemeWhatever={setThemeWhatever} />
+            <Header />
 
             <main className="max-w-6xl mx-auto py-4 px-6">
                 {loadingListings ? (
@@ -28,7 +30,7 @@ const Home: NextPage = () => {
                         {listings?.map((listing) => (
                             <div
                                 key={listing.id}
-                                className="flex flex-col relative card hover:scale-105 odd:hover:-skew-x-1 hover:skew-x-1 transition-all duration-150 ease-out"
+                                className="flex flex-col relative card hover:scale-105 md:odd:hover:-skew-x-1 md:hover:skew-x-1 transition-all duration-150 ease-out"
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br from-skin-hue/30 via-skin-hue/10 to-transparent opacity-50"></div>
 
