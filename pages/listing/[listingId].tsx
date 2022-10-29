@@ -50,8 +50,6 @@ function listingPage() {
         }
     }, [listingId, contract, listing])
 
-    console.log(bidAmount.toString())
-
     const fetchMinNextBid = async () => {
         if (!listing || !contract) return
         const { displayValue, symbol } = await contract.auction.getMinimumNextBid(listingId)
@@ -112,6 +110,11 @@ function listingPage() {
     }
 
     const createBidOrOffer = async () => {
+        if (!address) {
+            toast.error("Connect your wallet!")
+            return
+        }
+        const notification = toast.loading("Placing Bid... ")
         try {
             if (networkMismatch) {
                 switchNetwork && switchNetwork(network)
@@ -120,10 +123,16 @@ function listingPage() {
             //Direct
             if (listing?.type === ListingType.Direct) {
                 if (listing.buyoutPrice.toString() === utils.parseEther(bidAmount).toString()) {
+                    toast.loading("Buyout Price met, buying NFT...!", {
+                        id: notification,
+                    })
                     console.log("Buyout Price met, buying NFT...")
                     buyNft()
                     return
                 }
+                toast.loading("Buyout price not met, making offer...!", {
+                    id: notification,
+                })
                 console.log("Buyout price not met, making offer...")
                 await makeOffer(
                     {
@@ -133,12 +142,16 @@ function listingPage() {
                     },
                     {
                         onSuccess(data, variables, context) {
-                            alert("Offer made successfully")
+                            toast.success("Offer made successfully!", {
+                                id: notification,
+                            })
                             console.log("SUCCESS: ", data, variables, context)
                             setBidAmount("")
                         },
                         onError(error, variables, context) {
-                            alert("ERROR: Offer could not be made")
+                            toast.error("Whoops something went wrong!", {
+                                id: notification,
+                            })
                             console.log("ERROR: ", error, variables, context)
                         },
                     }
@@ -147,7 +160,7 @@ function listingPage() {
 
             //Auction
             if (listing?.type === ListingType.Auction) {
-                console.log("Making Bid...")
+                console.log("Placing Bid...")
                 await makeBid(
                     {
                         listingId,
@@ -155,12 +168,16 @@ function listingPage() {
                     },
                     {
                         onSuccess(data, variables, context) {
-                            alert("Bid made successfully")
+                            toast.success("Bid made successfully", {
+                                id: notification,
+                            })
                             console.log("SUCCESS: ", data, variables, context)
                             setBidAmount("")
                         },
                         onError(error, variables, context) {
-                            alert("ERROR: Bid could not be made")
+                            toast.error("Whoops something went wrong!", {
+                                id: notification,
+                            })
                             console.log("ERROR: ", error, variables, context)
                         },
                     }
@@ -184,143 +201,180 @@ function listingPage() {
     if (!listing) {
         return <div>Listing not found</div>
     }
-
     return (
         <div className={`-z-50 ${themeWhatever === "root" ? "" : themeWhatever}`}>
             <Header />
-            <main className="mx-auto flex max-w-6xl flex-col space-y-10 space-x-5 p-2 pr-10 lg:flex-row">
-                <div className="mx-auto max-w-md border border-grayBorder p-10 lg:mx-0 lg:max-w-xl">
-                    <MediaRenderer src={listing?.asset.image} />
+            <main className="mx-auto flex max-w-6xl flex-col space-y-10  p-4 md:p-2 md:pr-10 lg:flex-row">
+                <div className="mx-auto max-w-md p-6  md:p-10 lg:mx-0 lg:max-w-xl">
+                    <div className=" border border-grayBorder bg-flatWhite p-4 ">
+                        <MediaRenderer src={listing?.asset.image} />
+                    </div>
                 </div>
                 <section className="flex-1 space-y-5 pb-20 lg:pb-0">
-                    <div>
-                        <h1 className="text-xl font-bold">{listing.asset.name}</h1>
-                        <p className="text-skin-accent">{listing.asset.description}</p>
-                        <p className="flex items-center text-xs sm:text-skin-base">
-                            <UserCircleIcon className="h-5" />
-                            <span className="pr-1 font-bold">Seller:</span> {listing.sellerAddress}
+                    <div className=" -mt-6 text-center lg:mt-0 lg:text-left">
+                        <h1 className="text-xl font-bold text-skin-accent opacity-50 md:text-4xl">
+                            {listing.asset.name}
+                        </h1>
+                        <p className="text-sm font-semibold text-skin-accent md:text-lg">
+                            {listing.asset.description}
+                        </p>
+                        <p className="flex items-center justify-center pb-5 text-xs text-skin-accent md:text-sm lg:justify-start">
+                            {/* <UserCircleIcon className="h-5" /> */}
+                            <span className="pr-1 text-skin-accent">owner:</span>{" "}
+                            {listing.sellerAddress.slice(0, 5) +
+                                "..." +
+                                listing.sellerAddress.slice(-5)}
                         </p>
                     </div>
-                    <div className="grid grid-cols-2 items-center py-2">
-                        <p className="font-bold">Listing Type:</p>
-                        <p className="font-bold">
-                            {listing.type === ListingType.Direct
-                                ? "Direct Listing"
-                                : "Auction Listing"}
-                        </p>
-                        <p className="font-bold">Buy it now Price:</p>
-                        <p className="text-4xl font-bold">
-                            {listing.buyoutCurrencyValuePerToken.displayValue}
-                        </p>
-                        <p>{listing.buyoutCurrencyValuePerToken.symbol}</p>
-
-                        <button
-                            onClick={buyNft}
-                            className="col-start-2 mt-2 w-44 rounded-full bg-skin-fill py-4 px-10 font-bold text-flatWhite"
-                        >
-                            Buy Now
-                        </button>
+                    <div className="flex flex-col space-y-5 md:mx-auto md:max-w-xl ">
+                        <div className="flex flex-col items-center  py-2 sm:flex-row md:justify-between  md:space-x-10">
+                            <div className="text-center sm:ml-20 sm:text-left lg:ml-0">
+                                <p className="text-sm font-bold text-skin-accent md:text-lg">
+                                    {listing.type === ListingType.Direct
+                                        ? "Direct Listing"
+                                        : "Auction Listing"}
+                                </p>
+                                <div className="flex space-x-2 text-2xl font-bold text-skin-accent">
+                                    <p>{listing.buyoutCurrencyValuePerToken.displayValue} </p>
+                                    <p>{listing.buyoutCurrencyValuePerToken.symbol}</p>
+                                </div>
+                            </div>
+                            <button
+                                onClick={buyNft}
+                                className="mt-2 w-32 rounded border-2 border-grayBorder bg-skin-button-accent-hover py-2 px-4 font-bold text-skin-muted hover:bg-skin-fill hover:text-skin-inverted md:mr-20 md:w-44 md:justify-end md:px-10"
+                            >
+                                Buy Now
+                            </button>
+                        </div>
+                        <div className="flex flex-col items-center justify-center py-2 sm:flex-row md:justify-between md:space-x-10">
+                            <div className="sm:ml-20 lg:ml-0">
+                                <p className="text-center text-sm font-bold text-skin-accent md:text-left md:text-lg">
+                                    {listing.type === ListingType.Direct
+                                        ? "Make an Offer"
+                                        : "Bid on this Auction"}
+                                </p>
+                                <div>
+                                    {listing.type === ListingType.Auction && (
+                                        <div className="text-center md:text-left ">
+                                            <p className="text-2xl font-bold text-skin-accent">
+                                                {minimumNextBid?.displayValue}{" "}
+                                                {minimumNextBid?.symbol}
+                                            </p>
+                                            <Countdown
+                                                date={
+                                                    Number(
+                                                        listing.endTimeInEpochSeconds.toString()
+                                                    ) * 1000
+                                                }
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                                <input
+                                    className="mx-auto mt-2 rounded-lg border border-grayBorder bg-white p-2 focus:border-transparent focus:ring-grayBorder "
+                                    type="text"
+                                    onChange={(e) => setBidAmount(e.target.value)}
+                                    placeholder={formatPlaceholder()}
+                                />
+                            </div>
+                            <button
+                                onClick={createBidOrOffer}
+                                className="mt-4 w-32 rounded border-2 border-grayBorder bg-skin-button-accent-hover py-2 px-4 font-bold text-skin-muted hover:bg-skin-fill hover:text-skin-inverted md:mr-20 md:w-44 md:px-10"
+                            >
+                                {listing.type === ListingType.Direct ? "Offer" : "Bid"}
+                            </button>
+                        </div>
                     </div>
 
                     {listing.type === ListingType.Direct && offers && (
-                        <div className="grid grid-cols-2 gap-y-2">
-                            <p className="font-bold">Offers: </p>
-                            <p className="font-bold">{offers.length > 0 ? offers.length : 0}</p>
+                        <div className="mx-auto flex flex-col justify-center gap-y-2 py-2  pt-5">
+                            <div className="text-center text-sm font-bold text-skin-accent md:text-lg">
+                                {offers.length > 0 ? (
+                                    <p className="">{offers.length} Offers</p>
+                                ) : (
+                                    <p className="">No offers</p>
+                                )}
+                            </div>
                             {offers.map((offer) => (
-                                <>
-                                    <p className="ml-5 flex items-center text-sm italic">
-                                        {offer.offerer.slice(0, 5) +
-                                            "..." +
-                                            offer.offeror.slice(-5)}
-                                    </p>
-                                    <div>
-                                        <p
+                                <div className="mx-auto flex w-full justify-center space-x-10 xs:px-10 lg:space-x-16">
+                                    <div className="flex flex-col items-center md:flex-row md:space-x-3">
+                                        <p className="items-center text-sm italic text-skin-accent">
+                                            {offer.offerer.slice(0, 5) +
+                                                "..." +
+                                                offer.offeror.slice(-5)}
+                                        </p>
+                                        <div
                                             key={
                                                 offer.listingId +
                                                 offer.offeror +
                                                 offer.totalOfferAmount.toString()
                                             }
-                                            className="text-sm italic"
+                                            className="flex items-center space-x-2 text-sm font-semibold text-skin-accent md:text-lg"
                                         >
-                                            {ethers.utils.formatEther(offer.totalOfferAmount)}
-                                            {NATIVE_TOKENS[network].symbol}
-                                        </p>
-                                        {listing.sellerAddress === address && (
-                                            <button
-                                                onClick={() => {
-                                                    acceptOffer(
-                                                        {
-                                                            listingId,
-                                                            addressOfOfferor: offer.offeror,
-                                                        },
-                                                        {
-                                                            onSuccess(data, variables, context) {
-                                                                alert("Offer accepted successfully")
-                                                                console.log(
-                                                                    "SUCCESS: ",
-                                                                    data,
-                                                                    variables,
-                                                                    context
-                                                                )
-                                                                router.replace("/")
-                                                            },
-                                                            onError(error, variables, context) {
-                                                                alert(
-                                                                    "ERROR: Offer could not be accepted"
-                                                                )
-                                                                console.log(
-                                                                    "ERROR: ",
-                                                                    error,
-                                                                    variables,
-                                                                    context
-                                                                )
-                                                            },
-                                                        }
-                                                    )
-                                                }}
-                                                className="w-32 cursor-pointer rounded-lg bg-red-500/50 p-2 text-xs font-bold"
-                                            >
-                                                Accept Offer
-                                            </button>
-                                        )}
+                                            <p>
+                                                {ethers.utils.formatEther(offer.totalOfferAmount)}
+                                            </p>
+                                            <p> {NATIVE_TOKENS[network].symbol}</p>
+                                        </div>
                                     </div>
-                                </>
+
+                                    {listing.sellerAddress === address && (
+                                        <button
+                                            className="w-fit cursor-pointer items-center self-center rounded border-2 border-grayBorder bg-skin-button-accent-hover py-2 px-4 text-xs font-bold text-skin-muted hover:bg-skin-fill hover:text-skin-inverted md:h-10 md:py-0 md:text-sm"
+                                            onClick={() => {
+                                                if (!address) {
+                                                    toast.error("Connect your wallet!")
+                                                    return
+                                                }
+                                                const notification =
+                                                    toast.loading("Placing Offer... ")
+                                                acceptOffer(
+                                                    {
+                                                        listingId,
+                                                        addressOfOfferor: offer.offeror,
+                                                    },
+                                                    {
+                                                        onSuccess(data, variables, context) {
+                                                            toast.success(
+                                                                "Offer accepted successfully",
+                                                                {
+                                                                    id: notification,
+                                                                }
+                                                            )
+                                                            console.log(
+                                                                "SUCCESS: ",
+                                                                data,
+                                                                variables,
+                                                                context
+                                                            )
+                                                            router.replace("/")
+                                                        },
+                                                        onError(error, variables, context) {
+                                                            toast.error(
+                                                                "Whoops something went wrong!",
+                                                                {
+                                                                    id: notification,
+                                                                }
+                                                            )
+
+                                                            console.log(
+                                                                "ERROR: ",
+                                                                error,
+                                                                variables,
+                                                                context
+                                                            )
+                                                        },
+                                                    }
+                                                )
+                                            }}
+                                        >
+                                            Accept
+                                        </button>
+                                    )}
+                                </div>
                             ))}
                         </div>
                     )}
-
-                    <div className="grid grid-cols-2 items-center justify-end space-y-2">
-                        <hr className="col-span-2" />
-                        <p className="col-span-2">
-                            {listing.type === ListingType.Direct
-                                ? "Make an Offer"
-                                : "Bid on this Auction"}
-                        </p>
-                        {listing.type === ListingType.Auction && (
-                            <>
-                                <p>Current Minimun Bid:</p>
-                                <p className="font-bold">
-                                    {minimumNextBid?.displayValue} {minimumNextBid?.symbol}
-                                </p>
-                                <p>Time Remaining:</p>
-                                <Countdown
-                                    date={Number(listing.endTimeInEpochSeconds.toString()) * 1000}
-                                />
-                            </>
-                        )}
-                        <input
-                            className="mr-5 rounded-lg border border-grayBorder p-2"
-                            type="text"
-                            onChange={(e) => setBidAmount(e.target.value)}
-                            placeholder={formatPlaceholder()}
-                        />
-                        <button
-                            onClick={createBidOrOffer}
-                            className="w-44 rounded-full bg-skin-fill py-4 px-10 font-bold text-flatWhite"
-                        >
-                            {listing.type === ListingType.Direct ? "Offer" : "Bid"}
-                        </button>
-                    </div>
                 </section>
             </main>
         </div>

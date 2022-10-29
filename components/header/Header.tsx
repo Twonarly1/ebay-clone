@@ -321,7 +321,7 @@ const Header = ({}: Props) => {
 
             <hr />
 
-            <section className="mt-2 flex justify-center space-x-6 whitespace-nowrap py-1 px-6 text-sm">
+            <section className="mt-2 flex justify-center space-x-6 whitespace-nowrap py-1 px-10 text-xs xs:text-sm">
                 <p className="link">Home</p>
                 <p className="link">Electronics</p>
                 <p className="link">Computers</p>
