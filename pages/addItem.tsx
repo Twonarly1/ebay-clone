@@ -65,9 +65,9 @@ const addItem = (props: Props) => {
                 </p>
                 <div className="relative flex flex-col items-center justify-center pt-5 md:flex-row md:space-x-5">
                     <Image
-                        className="h-80 w-80 shrink-0 border bg-black object-contain"
+                        className="h-80 w-80 shrink-0 animate-blob border bg-flatWhite object-contain"
                         alt="Thirdweb Logo"
-                        src={preview || "https://links.papareact.com/ucj"}
+                        src={preview || "/placeholder-image.png"}
                         width={100}
                         height={100}
                     />
@@ -100,7 +100,7 @@ const addItem = (props: Props) => {
                             Image of the Item
                         </label>
                         <input
-                            className="  w-full"
+                            className="w-full"
                             type="file"
                             onChange={(e) => {
                                 if (e.target.files?.[0]) {

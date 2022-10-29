@@ -84,7 +84,7 @@ const Header = ({}: Props) => {
                         Help<span className="ml-1 hidden md:flex">& Contact</span>
                     </p>
                     <Link href="/addItem" className=" hover:text-flatBlack">
-                        <PlusIcon className="hidden w-4 cursor-default hover:scale-110 xs:flex md:w-5" />
+                        <PlusIcon className="hidden w-4 cursor-pointer hover:scale-110 xs:flex md:w-5" />
                     </Link>
                 </div>
 
