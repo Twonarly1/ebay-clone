@@ -3,6 +3,7 @@ import type { AppProps } from "next/app"
 import { ThirdwebProvider } from "@thirdweb-dev/react"
 import network from "lib/thirdweb/network"
 import Head from "next/head"
+import { Toaster } from "react-hot-toast"
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -17,6 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <link rel="icon" href="/two.png" />
             </Head>
             <ThirdwebProvider desiredChainId={network}>
+                <Toaster />
                 <Component {...pageProps} />
             </ThirdwebProvider>
         </>

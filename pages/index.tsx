@@ -5,6 +5,7 @@ import { ListingType } from "@thirdweb-dev/sdk"
 import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline"
 import { useState } from "react"
 import { useStore } from "components/header/Header"
+import Link from "next/link"
 
 const Home: NextPage = () => {
     const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT, "marketplace")
@@ -28,7 +29,8 @@ const Home: NextPage = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mx-auto">
                         {listings?.map((listing) => (
-                            <div
+                            <Link
+                                href={`/listing/${listing.id}`}
                                 key={listing.id}
                                 className="flex flex-col relative card hover:scale-105 md:odd:hover:-skew-x-1 md:hover:skew-x-1 transition-all duration-150 ease-out"
                             >
@@ -74,7 +76,7 @@ const Home: NextPage = () => {
                                         )}
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 )}

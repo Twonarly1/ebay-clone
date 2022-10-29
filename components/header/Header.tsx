@@ -100,7 +100,7 @@ const Header = ({}: Props) => {
                             className="animation-delay-2000 animate-blob"
                             onClick={() => updateThemeName("root")}
                         >
-                            <div className="h-4 w-4 rounded-full bg-ebay-blue md:h-5 md:w-5" />
+                            <div className="h-4 w-4 rounded-full bg-ebay-green md:h-5 md:w-5" />
                         </button>
                         <button
                             className="animation-delay-4000 animate-blob"
@@ -110,9 +110,9 @@ const Header = ({}: Props) => {
                         </button>
                         <button
                             className="animation-delay-6000 animate-blob"
-                            onClick={() => updateThemeName("theme-ebay-green")}
+                            onClick={() => updateThemeName("theme-ebay-blue")}
                         >
-                            <div className="h-4 w-4 rounded-full bg-ebay-green md:h-5 md:w-5" />
+                            <div className="h-4 w-4 rounded-full bg-ebay-blue md:h-5 md:w-5" />
                         </button>
                     </div>
 
