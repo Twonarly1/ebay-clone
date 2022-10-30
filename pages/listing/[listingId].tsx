@@ -226,9 +226,9 @@ function listingPage() {
                                 listing.sellerAddress.slice(-5)}
                         </p>
                     </div>
-                    <div className="flex flex-col space-y-5 md:mx-auto md:max-w-xl ">
-                        <div className="flex flex-col items-center  py-2 sm:flex-row md:justify-between  md:space-x-10">
-                            <div className="text-center sm:ml-20 sm:text-left lg:ml-0">
+                    <div className="flex max-w-xl flex-col space-y-5 md:mx-auto">
+                        <div className="flex flex-col items-center justify-center py-2 sm:flex-row sm:justify-between  md:space-x-10">
+                            <div className="text-center sm:pl-20 sm:text-left lg:pl-0 ">
                                 <p className="text-sm font-bold text-skin-accent md:text-lg">
                                     {listing.type === ListingType.Direct
                                         ? "Direct Listing"
@@ -246,16 +246,16 @@ function listingPage() {
                                 Buy Now
                             </button>
                         </div>
-                        <div className="flex flex-col items-center justify-center py-2 sm:flex-row md:justify-between md:space-x-10">
-                            <div className="sm:ml-20 lg:ml-0">
-                                <p className="text-center text-sm font-bold text-skin-accent md:text-left md:text-lg">
+                        <div className="flex flex-col items-center justify-center py-2 sm:flex-row sm:justify-between md:space-x-10">
+                            <div className="sm:pl-20 lg:pl-0">
+                                <p className="text-center text-sm font-bold text-skin-accent sm:text-left md:text-left md:text-lg">
                                     {listing.type === ListingType.Direct
                                         ? "Make an Offer"
                                         : "Bid on this Auction"}
                                 </p>
                                 <div>
                                     {listing.type === ListingType.Auction && (
-                                        <div className="text-center md:text-left ">
+                                        <div className="text-center sm:text-left ">
                                             <p className="text-2xl font-bold text-skin-accent">
                                                 {minimumNextBid?.displayValue}{" "}
                                                 {minimumNextBid?.symbol}

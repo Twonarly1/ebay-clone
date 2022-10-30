@@ -3,14 +3,12 @@ import type { NextPage } from "next"
 import { useActiveListings, useContract, MediaRenderer } from "@thirdweb-dev/react"
 import { ListingType } from "@thirdweb-dev/sdk"
 import { BanknotesIcon, ClockIcon } from "@heroicons/react/24/outline"
-import { useState } from "react"
 import { useStore } from "components/header/Header"
 import Link from "next/link"
 
 const Home: NextPage = () => {
     const { contract } = useContract(process.env.NEXT_PUBLIC_MARKETPLACE_CONTRACT, "marketplace")
     const { data: listings, isLoading: loadingListings } = useActiveListings(contract)
-    // const [themeWhatever, setThemeWhatever] = useState<any>("")
     const themeWhatever = useStore().themeName
 
     return (
@@ -36,7 +34,7 @@ const Home: NextPage = () => {
                             >
                                 <div className="absolute inset-0 bg-gradient-to-br rounded from-skin-hue/30 via-skin-hue/10 to-transparent opacity-50"></div>
 
-                                <div className="flex-1 flex flex-col pb-2 items-center">
+                                <div className="flex-1 flex flex-col  pb-2 items-center">
                                     <MediaRenderer
                                         className="z-10 w-44"
                                         src={listing.asset.image}
