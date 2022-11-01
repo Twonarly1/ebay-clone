@@ -100,7 +100,7 @@ const addItem = (props: Props) => {
                             Image of the Item
                         </label>
                         <input
-                            className="w-full"
+                            className="  w-full"
                             type="file"
                             onChange={(e) => {
                                 if (e.target.files?.[0]) {

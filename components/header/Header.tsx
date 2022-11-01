@@ -146,11 +146,11 @@ const Header = ({}: Props) => {
                                                                 className="focus:outline-none"
                                                             >
                                                                 <Image
-                                                                    className="h-full w-full object-contain"
+                                                                    className="w-ful h-full object-contain opacity-50"
                                                                     alt="Thirdweb Logo"
-                                                                    src="https://links.papareact.com/bdb"
-                                                                    width={100}
-                                                                    height={100}
+                                                                    src="/two.png"
+                                                                    width={40}
+                                                                    height={40}
                                                                 />
                                                             </Link>
                                                         </Dialog.Title>
@@ -286,9 +286,9 @@ const Header = ({}: Props) => {
                 >
                     <Link href="/">
                         <Image
-                            className="h-full w-full  shrink-0 object-contain"
+                            className="h-full w-full shrink-0  object-contain opacity-50"
                             alt="Thirdweb Logo"
-                            src="https://links.papareact.com/bdb"
+                            src="/two.png"
                             width={100}
                             height={100}
                         />

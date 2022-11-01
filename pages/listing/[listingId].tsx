@@ -299,7 +299,7 @@ function listingPage() {
                                 <div className="mx-auto flex w-full justify-center space-x-10 xs:px-10 lg:space-x-16">
                                     <div className="flex flex-col items-center md:flex-row md:space-x-3">
                                         <p className="items-center text-sm italic text-skin-accent">
-                                            {offer.offerer.slice(0, 5) +
+                                            {offer.offeror.slice(0, 5) +
                                                 "..." +
                                                 offer.offeror.slice(-5)}
                                         </p>
